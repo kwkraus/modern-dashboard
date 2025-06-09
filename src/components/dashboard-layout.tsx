@@ -31,7 +31,6 @@ const navigation = [
   { name: "Trends", href: "/trends", icon: TrendingUp },
   { name: "Calendar", href: "/calendar", icon: Calendar },
   { name: "Messages", href: "/messages", icon: Mail },
-  { name: "Settings", href: "/settings", icon: Settings },
 ]
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
