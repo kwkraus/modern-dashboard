@@ -56,7 +56,7 @@ const SidebarProvider = React.forwardRef<
       data-sidebar={open ? "open" : "closed"}
       data-mobile={isMobile}
       ref={ref}
-      className={cn("relative flex min-h-screen", className)}
+      className={cn("relative flex min-h-screen items-stretch", className)}
       {...props}
     >
       <SidebarContext.Provider value={{ open, setOpen, isMobile }}>
@@ -83,14 +83,14 @@ const Sidebar = React.forwardRef<
   return (
     <div
       ref={ref}      className={cn(
-        "flex h-screen flex-col border-r bg-background transition-all duration-300", // Changed from h-full to h-screen
-        // Mobile: fixed positioning with overlay behavior
+        "flex flex-col border-r bg-background transition-all duration-300",
+        // Mobile: fixed positioning with overlay behavior - use h-screen
         isMobile ? [
-          "fixed left-0 top-0 z-50",
+          "fixed left-0 top-0 z-50 h-screen",
           open ? "w-64 translate-x-0" : "w-64 -translate-x-full"
         ] : [
-          // Desktop: normal flow behavior
-          "relative",
+          // Desktop: normal flow behavior - self-stretch to match content height
+          "relative self-stretch",
           open ? "w-64" : "w-16"
         ],
         className
@@ -109,7 +109,8 @@ const SidebarHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex h-16 items-center border-b px-4", className)}
+    className={cn("flex h-16 items-center justify-start border-b bg-background px-4 shrink-0 border-border", className)}
+    style={{ lineHeight: 1 }}
     {...props}
   />
 ))

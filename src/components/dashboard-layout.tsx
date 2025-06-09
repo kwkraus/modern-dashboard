@@ -36,21 +36,17 @@ const navigation = [
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { open, isMobile } = useSidebar()
-    return (
-    <div className={cn(
-      "flex h-screen flex-col transition-all duration-300", // Changed from min-h-screen to h-screen
+  return (    <div className={cn(
+      "flex min-h-screen flex-col flex-1 transition-all duration-300", // Changed from h-screen to min-h-screen
       // Mobile: always full width, no margin adjustments
       isMobile ? "w-full" : [
         // Desktop: adjust margin based on sidebar state
         "transition-all duration-300",
         open ? "ml-0" : "ml-0"  // Let the sidebar handle its own width changes
       ]
-    )}>
-      <Header />
-      <main className={cn(
-        "flex-1 p-4 sm:p-6 transition-all duration-300",
-        // Add padding on desktop when sidebar is collapsed to account for fixed sidebar
-        !isMobile && !open && "ml-16"  // Compensate for collapsed sidebar width
+    )} style={{ marginTop: 0, paddingTop: 0 }}>
+      <Header />      <main className={cn(
+        "flex-1 w-full p-4 sm:p-6 transition-all duration-300" // Removed ml-16 compensation
       )}>
         {children}
       </main>

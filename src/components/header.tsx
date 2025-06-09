@@ -11,8 +11,7 @@ import { Bell, Search, Settings } from "lucide-react"
 export function Header() {
   const [searchOpen, setSearchOpen] = React.useState(false)
 
-  return (
-    <header className="flex h-16 items-center justify-between border-b bg-background px-4 sm:px-6">
+  return (    <header className="flex h-16 items-center justify-between border-b bg-background px-4 shrink-0 border-border" style={{ lineHeight: 1 }}>
       <div className="flex items-center gap-2 sm:gap-4">
         <SidebarTrigger className="h-9 w-9" />
         <Separator orientation="vertical" className="hidden h-6 sm:block" />
