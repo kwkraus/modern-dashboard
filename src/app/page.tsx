@@ -1,103 +1,197 @@
-import Image from "next/image";
+import { DashboardLayout } from "@/components/dashboard-layout"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { LineChartComponent, BarChartComponent, PieChartComponent } from "@/components/charts"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { 
+  TrendingUp, 
+  Users, 
+  DollarSign, 
+  Activity,
+  ArrowUpRight,
+  ArrowDownRight
+} from "lucide-react"
 
-export default function Home() {
+// Mock data for the dashboard
+const stats = [
+  {
+    title: "Total Revenue",
+    value: "$45,231.89",
+    change: "+20.1%",
+    changeType: "positive" as const,
+    icon: DollarSign,
+  },
+  {
+    title: "Active Users",
+    value: "2,350",
+    change: "+180.1%", 
+    changeType: "positive" as const,
+    icon: Users,
+  },
+  {
+    title: "Conversion Rate",
+    value: "12.5%",
+    change: "-4.3%",
+    changeType: "negative" as const,
+    icon: TrendingUp,
+  },
+  {
+    title: "Active Sessions",
+    value: "573",
+    change: "+12.1%",
+    changeType: "positive" as const,
+    icon: Activity,
+  },
+]
+
+const recentActivities = [
+  {
+    user: "John Doe",
+    action: "Created a new project",
+    time: "2 minutes ago",
+    avatar: "/placeholder-avatar-1.jpg",
+  },
+  {
+    user: "Jane Smith", 
+    action: "Updated user settings",
+    time: "5 minutes ago",
+    avatar: "/placeholder-avatar-2.jpg",
+  },
+  {
+    user: "Mike Johnson",
+    action: "Completed data analysis",
+    time: "10 minutes ago", 
+    avatar: "/placeholder-avatar-3.jpg",
+  },
+  {
+    user: "Sarah Wilson",
+    action: "Generated monthly report",
+    time: "15 minutes ago",
+    avatar: "/placeholder-avatar-4.jpg",
+  },
+]
+
+export default function Dashboard() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <DashboardLayout>
+      <div className="space-y-6">
+        {/* Page Header */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Dashboard</h1>
+            <p className="text-sm text-muted-foreground sm:text-base">
+              Welcome back! Here's what's happening with your business today.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <Badge variant="secondary">Live</Badge>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <Card key={stat.title}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                <stat.icon className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-xl font-bold sm:text-2xl">{stat.value}</div>
+                <p className="text-xs text-muted-foreground">
+                  <span className={`inline-flex items-center ${
+                    stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                  }`}>
+                    {stat.changeType === 'positive' ? (
+                      <ArrowUpRight className="h-3 w-3 mr-1" />
+                    ) : (
+                      <ArrowDownRight className="h-3 w-3 mr-1" />
+                    )}
+                    {stat.change}
+                  </span>
+                  {" "}from last month
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Charts Grid */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle>Revenue Over Time</CardTitle>
+              <CardDescription>
+                Monthly revenue trend for the past 6 months
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <LineChartComponent />
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Weekly Activity</CardTitle>
+              <CardDescription>
+                User activity by day of the week
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <BarChartComponent />
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Bottom Grid */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <Card>
+            <CardHeader>
+              <CardTitle>Traffic Sources</CardTitle>
+              <CardDescription>
+                Breakdown of traffic by device type
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <PieChartComponent />
+            </CardContent>
+          </Card>
+
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle>Recent Activity</CardTitle>
+              <CardDescription>
+                Latest user actions and system updates
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {recentActivities.map((activity, index) => (
+                  <div key={index} className="flex items-center gap-3 sm:gap-4">
+                    <Avatar className="h-8 w-8 sm:h-9 sm:w-9">
+                      <AvatarImage src={activity.avatar} alt={activity.user} />
+                      <AvatarFallback>
+                        {activity.user.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        {activity.user}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {activity.action}
+                      </p>
+                    </div>
+                    <div className="text-xs text-muted-foreground sm:text-sm">
+                      {activity.time}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </DashboardLayout>
+  )
 }
