@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { 
   SidebarProvider, 
@@ -23,13 +24,13 @@ import {
 } from "lucide-react"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: Home, active: true as boolean },
-  { name: "Analytics", href: "/analytics", icon: BarChart3, active: false as boolean },
-  { name: "Users", href: "/users", icon: Users, active: false as boolean },
-  { name: "Reports", href: "/reports", icon: FileText, active: false as boolean },
-  { name: "Trends", href: "/trends", icon: TrendingUp, active: false as boolean },
-  { name: "Calendar", href: "/calendar", icon: Calendar, active: false as boolean },
-  { name: "Messages", href: "/messages", icon: Mail, active: false as boolean },
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Analytics", href: "/analytics", icon: BarChart3 },
+  { name: "Users", href: "/users", icon: Users },
+  { name: "Reports", href: "/reports", icon: FileText },
+  { name: "Trends", href: "/trends", icon: TrendingUp },
+  { name: "Calendar", href: "/calendar", icon: Calendar },
+  { name: "Messages", href: "/messages", icon: Mail },
 ]
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
@@ -82,6 +83,13 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleNavigation = (href: string) => {
+    router.push(href)
+  }
+
   return (
     <SidebarProvider defaultOpen={true}>
       <Sidebar>
@@ -94,7 +102,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               <SidebarNavItem
                 key={item.name}
                 icon={<item.icon className="h-6 w-6" />}
-                active={item.active}
+                active={pathname === item.href}
+                onClick={() => handleNavigation(item.href)}
               >
                 {item.name}
               </SidebarNavItem>

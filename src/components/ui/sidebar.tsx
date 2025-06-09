@@ -144,7 +144,7 @@ const SidebarNavItem = React.forwardRef<
     icon?: React.ReactNode
     active?: boolean
   }
->(({ children, icon, active, className, ...props }, ref) => {
+>(({ children, icon, active, className, onClick, ...props }, ref) => {
   const { open } = useSidebar()
   
   return (
@@ -156,6 +156,7 @@ const SidebarNavItem = React.forwardRef<
         active && "bg-accent text-accent-foreground",
         className
       )}
+      onClick={onClick}
       {...props}
     >
       {icon && <div className="flex-shrink-0">{icon}</div>}
