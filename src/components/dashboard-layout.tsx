@@ -55,13 +55,25 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
 
 function SidebarHeaderContent() {
   const { open } = useSidebar()
+  const [showText, setShowText] = React.useState(open)
+  
+  React.useEffect(() => {
+    if (open) {
+      // Delay showing text to match sidebar expansion animation
+      const timer = setTimeout(() => setShowText(true), 150)
+      return () => clearTimeout(timer)
+    } else {
+      // Hide text immediately when closing
+      setShowText(false)
+    }
+  }, [open])
   
   return (
     <div className="flex items-center gap-2 font-semibold">
       <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
         <BarChart3 className="h-4 w-4 text-primary-foreground" />
       </div>
-      {open && <span className="text-lg truncate">Dashboard</span>}
+      {showText && <span className="text-lg truncate">Dashboard</span>}
     </div>
   )
 }
