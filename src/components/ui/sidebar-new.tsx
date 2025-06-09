@@ -83,15 +83,14 @@ const Sidebar = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex h-full flex-col border-r bg-background transition-all duration-300",
-        // Mobile: fixed positioning with overlay behavior
+        "flex h-full flex-col border-r bg-background transition-all duration-300",        // Mobile: fixed positioning with overlay behavior
         isMobile ? [
           "fixed left-0 top-0 z-50 h-screen",
-          open ? "w-64 translate-x-0" : "w-64 -translate-x-full"
+          open ? "w-48 translate-x-0" : "w-48 -translate-x-full"
         ] : [
           // Desktop: normal flow behavior
           "relative",
-          open ? "w-64" : "w-16"
+          open ? "w-48" : "w-16"
         ],
         className
       )}
