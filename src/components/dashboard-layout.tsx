@@ -73,7 +73,7 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={true}>
       <Sidebar>
         <SidebarHeader>
           <SidebarHeaderContent />
