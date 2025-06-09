@@ -16,7 +16,6 @@ import {
   BarChart3, 
   Home, 
   Users, 
-  Settings, 
   FileText, 
   TrendingUp,
   Calendar,
@@ -24,13 +23,13 @@ import {
 } from "lucide-react"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: Home, active: true },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "Users", href: "/users", icon: Users },
-  { name: "Reports", href: "/reports", icon: FileText },
-  { name: "Trends", href: "/trends", icon: TrendingUp },
-  { name: "Calendar", href: "/calendar", icon: Calendar },
-  { name: "Messages", href: "/messages", icon: Mail },
+  { name: "Dashboard", href: "/", icon: Home, active: true as boolean },
+  { name: "Analytics", href: "/analytics", icon: BarChart3, active: false as boolean },
+  { name: "Users", href: "/users", icon: Users, active: false as boolean },
+  { name: "Reports", href: "/reports", icon: FileText, active: false as boolean },
+  { name: "Trends", href: "/trends", icon: TrendingUp, active: false as boolean },
+  { name: "Calendar", href: "/calendar", icon: Calendar, active: false as boolean },
+  { name: "Messages", href: "/messages", icon: Mail, active: false as boolean },
 ]
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
@@ -56,8 +55,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
 function SidebarHeaderContent() {
   const { open } = useSidebar()
   const [showText, setShowText] = React.useState(open)
-  
-  React.useEffect(() => {
+    React.useEffect(() => {
     if (open) {
       // Delay showing text to match sidebar expansion animation
       const timer = setTimeout(() => setShowText(true), 150)
@@ -65,6 +63,7 @@ function SidebarHeaderContent() {
     } else {
       // Hide text immediately when closing
       setShowText(false)
+      return undefined
     }
   }, [open])
   

@@ -1,75 +1,13 @@
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { LineChartComponent, BarChartComponent, PieChartComponent } from "@/components/charts"
+import { MemoizedLineChart, MemoizedBarChart, MemoizedPieChart } from "@/components/charts"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { 
-  TrendingUp, 
-  Users, 
-  DollarSign, 
-  Activity,
   ArrowUpRight,
   ArrowDownRight
 } from "lucide-react"
-
-// Mock data for the dashboard
-const stats = [
-  {
-    title: "Total Revenue",
-    value: "$45,231.89",
-    change: "+20.1%",
-    changeType: "positive" as const,
-    icon: DollarSign,
-  },
-  {
-    title: "Active Users",
-    value: "2,350",
-    change: "+180.1%", 
-    changeType: "positive" as const,
-    icon: Users,
-  },
-  {
-    title: "Conversion Rate",
-    value: "12.5%",
-    change: "-4.3%",
-    changeType: "negative" as const,
-    icon: TrendingUp,
-  },
-  {
-    title: "Active Sessions",
-    value: "573",
-    change: "+12.1%",
-    changeType: "positive" as const,
-    icon: Activity,
-  },
-]
-
-const recentActivities = [
-  {
-    user: "John Doe",
-    action: "Created a new project",
-    time: "2 minutes ago",
-    avatar: "/placeholder-avatar-1.jpg",
-  },
-  {
-    user: "Jane Smith", 
-    action: "Updated user settings",
-    time: "5 minutes ago",
-    avatar: "/placeholder-avatar-2.jpg",
-  },
-  {
-    user: "Mike Johnson",
-    action: "Completed data analysis",
-    time: "10 minutes ago", 
-    avatar: "/placeholder-avatar-3.jpg",
-  },
-  {
-    user: "Sarah Wilson",
-    action: "Generated monthly report",
-    time: "15 minutes ago",
-    avatar: "/placeholder-avatar-4.jpg",
-  },
-]
+import { DASHBOARD_STATS, RECENT_ACTIVITIES } from "@/lib/constants"
 
 export default function Dashboard() {
   return (
@@ -80,7 +18,7 @@ export default function Dashboard() {
           <div>
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Dashboard</h1>
             <p className="text-sm text-muted-foreground sm:text-base">
-              Welcome back! Here's what's happening with your business today.
+              Welcome back! Here&apos;s what&apos;s happening with your business today.
             </p>
           </div>
           <div className="flex items-center gap-2 self-start sm:self-auto">
@@ -90,7 +28,7 @@ export default function Dashboard() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
+          {DASHBOARD_STATS.map((stat) => (
             <Card key={stat.title}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
@@ -126,7 +64,7 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <LineChartComponent />
+              <MemoizedLineChart />
             </CardContent>
           </Card>
           
@@ -138,7 +76,7 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <BarChartComponent />
+              <MemoizedBarChart />
             </CardContent>
           </Card>
         </div>
@@ -153,7 +91,7 @@ export default function Dashboard() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <PieChartComponent />
+              <MemoizedPieChart />
             </CardContent>
           </Card>
 
@@ -166,12 +104,12 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {recentActivities.map((activity, index) => (
+                {RECENT_ACTIVITIES.map((activity, index) => (
                   <div key={index} className="flex items-center gap-3 sm:gap-4">
                     <Avatar className="h-8 w-8 sm:h-9 sm:w-9">
                       <AvatarImage src={activity.avatar} alt={activity.user} />
                       <AvatarFallback>
-                        {activity.user.split(' ').map(n => n[0]).join('')}
+                        {activity.initials}
                       </AvatarFallback>
                     </Avatar>
                     <div className="min-w-0 flex-1 space-y-1">

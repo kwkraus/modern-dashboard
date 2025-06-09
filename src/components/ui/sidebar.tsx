@@ -43,13 +43,12 @@ const SidebarProvider = React.forwardRef<
 >(({ defaultOpen = false, children, className, ...props }, ref) => {
   const { isMobile } = useViewport()
   const [open, setOpen] = React.useState(defaultOpen)
-  
-  // Auto-close on mobile when switching from desktop
+    // Auto-close on mobile when switching from desktop
   React.useEffect(() => {
     if (isMobile && open) {
       setOpen(false)
     }
-  }, [isMobile])
+  }, [isMobile, open])
 
   return (
     <div

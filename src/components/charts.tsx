@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import {
   ResponsiveContainer,
   LineChart,
@@ -14,36 +15,12 @@ import {
   Pie,
   Cell,
 } from "recharts"
-
-const lineData = [
-  { name: "Jan", value: 400 },
-  { name: "Feb", value: 300 },
-  { name: "Mar", value: 600 },
-  { name: "Apr", value: 800 },
-  { name: "May", value: 700 },
-  { name: "Jun", value: 900 },
-]
-
-const barData = [
-  { name: "Mon", value: 20 },
-  { name: "Tue", value: 35 },
-  { name: "Wed", value: 25 },
-  { name: "Thu", value: 40 },
-  { name: "Fri", value: 30 },
-  { name: "Sat", value: 15 },
-  { name: "Sun", value: 10 },
-]
-
-const pieData = [
-  { name: "Desktop", value: 45, color: "hsl(var(--chart-1))" },
-  { name: "Mobile", value: 35, color: "hsl(var(--chart-2))" },
-  { name: "Tablet", value: 20, color: "hsl(var(--chart-3))" },
-]
+import { CHART_DATA } from "@/lib/constants"
 
 export function LineChartComponent() {
   return (
     <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
-      <LineChart data={lineData}>
+      <LineChart data={CHART_DATA.line}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
         <XAxis 
           dataKey="name" 
@@ -79,7 +56,7 @@ export function LineChartComponent() {
 export function BarChartComponent() {
   return (
     <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
-      <BarChart data={barData}>
+      <BarChart data={CHART_DATA.bar}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
         <XAxis 
           dataKey="name" 
@@ -113,9 +90,8 @@ export function BarChartComponent() {
 export function PieChartComponent() {
   return (
     <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
-      <PieChart>
-        <Pie
-          data={pieData}
+      <PieChart>        <Pie
+          data={CHART_DATA.pie}
           cx="50%"
           cy="50%"
           innerRadius={40}
@@ -124,9 +100,8 @@ export function PieChartComponent() {
           dataKey="value"
           className="sm:inner-radius-[60px] sm:outer-radius-[100px]"
         >
-          {pieData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
-          ))}
+          {CHART_DATA.pie.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />          ))}
         </Pie>
         <Tooltip 
           contentStyle={{
@@ -140,3 +115,8 @@ export function PieChartComponent() {
     </ResponsiveContainer>
   )
 }
+
+// Memoize chart components for better performance
+export const MemoizedLineChart = React.memo(LineChartComponent)
+export const MemoizedBarChart = React.memo(BarChartComponent)  
+export const MemoizedPieChart = React.memo(PieChartComponent)
