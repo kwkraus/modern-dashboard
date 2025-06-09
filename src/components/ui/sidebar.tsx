@@ -82,12 +82,11 @@ const Sidebar = React.forwardRef<
   
   return (
     <div
-      ref={ref}
-      className={cn(
-        "flex h-full flex-col border-r bg-background transition-all duration-300",
+      ref={ref}      className={cn(
+        "flex h-screen flex-col border-r bg-background transition-all duration-300", // Changed from h-full to h-screen
         // Mobile: fixed positioning with overlay behavior
         isMobile ? [
-          "fixed left-0 top-0 z-50 h-screen",
+          "fixed left-0 top-0 z-50",
           open ? "w-64 translate-x-0" : "w-64 -translate-x-full"
         ] : [
           // Desktop: normal flow behavior

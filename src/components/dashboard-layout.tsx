@@ -36,10 +36,9 @@ const navigation = [
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { open, isMobile } = useSidebar()
-  
-  return (
+    return (
     <div className={cn(
-      "flex min-h-screen flex-col transition-all duration-300",
+      "flex h-screen flex-col transition-all duration-300", // Changed from min-h-screen to h-screen
       // Mobile: always full width, no margin adjustments
       isMobile ? "w-full" : [
         // Desktop: adjust margin based on sidebar state
