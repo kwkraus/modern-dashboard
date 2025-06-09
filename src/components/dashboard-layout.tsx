@@ -85,7 +85,6 @@ interface DashboardLayoutProps {
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname()
   const router = useRouter()
-
   const handleNavigation = (href: string) => {
     router.push(href)
   }

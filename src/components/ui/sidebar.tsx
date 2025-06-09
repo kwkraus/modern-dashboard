@@ -12,7 +12,10 @@ function useViewport() {
       setIsMobile(window.innerWidth < 768)
     }
     
+    // Check on mount
     checkViewport()
+    
+    // Add resize listener
     window.addEventListener('resize', checkViewport)
     return () => window.removeEventListener('resize', checkViewport)
   }, [])
@@ -43,12 +46,13 @@ const SidebarProvider = React.forwardRef<
 >(({ defaultOpen = false, children, className, ...props }, ref) => {
   const { isMobile } = useViewport()
   const [open, setOpen] = React.useState(defaultOpen)
-    // Auto-close on mobile when switching from desktop
+  
+  // Auto-close when switching to mobile viewport
   React.useEffect(() => {
-    if (isMobile && open) {
+    if (isMobile && defaultOpen) {
       setOpen(false)
     }
-  }, [isMobile, open])
+  }, [isMobile, defaultOpen])
 
   return (
     <div
@@ -81,13 +85,16 @@ const Sidebar = React.forwardRef<
   
   return (
     <div
-      ref={ref}      className={cn(
-        "flex flex-col border-r bg-background transition-all duration-300",        // Mobile: fixed positioning with overlay behavior - use h-screen
+      ref={ref}
+      className={cn(
+        "flex flex-col border-r bg-background transition-all duration-300",
+        // Mobile: fixed positioning with overlay behavior
         isMobile ? [
           "fixed left-0 top-0 z-50 h-screen",
-          open ? "w-48 translate-x-0" : "w-48 -translate-x-full"
+          "w-48", // Always maintain width for smooth animation
+          open ? "translate-x-0" : "-translate-x-full"
         ] : [
-          // Desktop: normal flow behavior - self-stretch to match content height
+          // Desktop: normal flow behavior
           "relative self-stretch",
           open ? "w-48" : "w-16"
         ],
@@ -180,7 +187,8 @@ const SidebarTrigger = React.forwardRef<
         "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground",
         "h-9 w-9 min-h-[44px] min-w-[44px] touch-target", // Enhanced touch target
         className
-      )}      aria-label="Toggle sidebar"
+      )}
+      aria-label="Toggle sidebar"
       type="button"
       {...props}
     >
