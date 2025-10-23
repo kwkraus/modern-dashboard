@@ -114,7 +114,13 @@ To enable preload, update `next.config.ts`:
 While `X-XSS-Protection` is considered legacy (Chrome deprecated it in 2019), it provides defense-in-depth protection for older browsers. Modern security relies on Content-Security-Policy.
 
 ### Cache-Control Precedence
-Headers are processed in order by Next.js. The static asset cache rule comes BEFORE the HTML cache rule, which is critical for correct behavior. Since static files (with extensions like .png, .ico, etc.) match the more specific pattern first, they get long-term caching (1 year). HTML pages and other routes match the `/:path*` pattern and get revalidation behavior. This ordering ensures static assets are cached aggressively while HTML content stays fresh.
+Headers are processed in order by Next.js - **the first matching rule wins**. The static asset cache rule MUST come BEFORE the HTML cache rule for correct behavior. Here's why:
+
+1. Static files (*.png, *.ico, etc.) match the regex pattern first and get long-term caching (1 year)
+2. If the HTML cache rule with `/:path*` came first, it would match ALL paths (including static files) and override the intended long-term caching
+3. HTML pages and API routes that don't match the static pattern fall through to `/:path*` and get revalidation behavior
+
+This ordering is critical - if reversed, static assets would incorrectly get `max-age=0` instead of long-term caching, hurting performance.
 
 ## Resources
 - [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/)
