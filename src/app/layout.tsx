@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   keywords: ["dashboard", "analytics", "next.js", "react", "typescript", "tailwind"],
   authors: [{ name: "Dashboard Team" }],
   creator: "Dashboard Team",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
   openGraph: {
     type: "website",
     locale: "en_US",
