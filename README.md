@@ -25,7 +25,23 @@ A beautiful, responsive dashboard template built with Next.js 15, Shadcn UI, and
 
 ## 🏃‍♂️ Getting Started
 
-First, install the dependencies:
+### 1. Environment Setup
+
+First, set up your environment variables:
+
+```bash
+# Copy the example environment file
+cp .env.example .env.local
+
+# Edit .env.local and update the values as needed
+```
+
+**Required Environment Variables:**
+- `NEXT_PUBLIC_APP_URL`: The base URL of your application (e.g., `http://localhost:3000` for development, or your production domain)
+
+See `.env.example` for all available environment variables and their descriptions.
+
+### 2. Install Dependencies
 
 ```bash
 npm install
@@ -35,7 +51,7 @@ yarn install
 pnpm install
 ```
 
-Then, run the development server:
+### 3. Run the Development Server
 
 ```bash
 npm run dev
@@ -100,7 +116,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 1. Push your code to a Git repository
 2. Import your repository to Vercel
-3. Vercel will automatically build and deploy your app
+3. **Configure environment variables** in your Vercel project settings (see `.env.example` for required variables)
+4. Vercel will automatically build and deploy your app
+
+**Important**: Make sure to set `NEXT_PUBLIC_APP_URL` to your production domain in the Vercel environment variables.
 
 ### Other Deployment Options
 

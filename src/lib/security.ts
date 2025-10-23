@@ -41,10 +41,12 @@ export function sanitizeInput(input: string): string {
 
 /**
  * Validate environment variables
+ * Ensures all required environment variables are set at application startup
  */
 export function validateEnv() {
   const required: string[] = [
-    // Add required environment variables here
+    'NEXT_PUBLIC_APP_URL',
+    // Add more required variables as needed
   ]
   
   const missing = required.filter(key => !process.env[key])
