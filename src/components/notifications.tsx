@@ -30,6 +30,10 @@ const STORAGE_KEY = "dashboard-notifications-read"
 function formatRelativeTime(timestamp: number): string {
   const now = Date.now()
   const diff = now - timestamp
+  
+  // Handle future timestamps
+  if (diff < 0) return "Just now"
+  
   const minutes = Math.floor(diff / (1000 * 60))
   const hours = Math.floor(diff / (1000 * 60 * 60))
   const days = Math.floor(diff / (1000 * 60 * 60 * 24))
