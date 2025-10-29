@@ -1,15 +1,27 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Bell, Search, Settings } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Bell, Search, Settings, User } from "lucide-react"
 
 export function Header() {
   const [searchOpen, setSearchOpen] = React.useState(false)
+  const router = useRouter()
+
+  const handleProfileClick = () => {
+    router.push('/profile')
+  }
 
   return (    <header className="flex h-16 items-center justify-between border-b bg-background px-4 shrink-0 border-border" style={{ lineHeight: 1 }}>
       <div className="flex items-center gap-2 sm:gap-4">
@@ -67,10 +79,22 @@ export function Header() {
         </Button>
         
         <Separator orientation="vertical" className="hidden h-6 sm:block" />
-        <Avatar className="h-8 w-8">
-          <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-          <AvatarFallback>JD</AvatarFallback>
-        </Avatar>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
+              <Avatar className="h-8 w-8">
+                <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer">
+              <User className="mr-2 h-4 w-4" />
+              <span>Profile</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   )
