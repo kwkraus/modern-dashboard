@@ -6,7 +6,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Bell, Search, Settings } from "lucide-react"
+import { Notifications } from "@/components/notifications"
+import { Search, Settings } from "lucide-react"
 
 export function Header() {
   const [searchOpen, setSearchOpen] = React.useState(false)
@@ -57,10 +58,7 @@ export function Header() {
         <ThemeToggle />
         
         {/* Hide secondary actions on mobile */}
-        <Button variant="ghost" size="sm" className="hidden h-9 w-9 p-0 sm:flex">
-          <Bell className="h-4 w-4" />
-          <span className="sr-only">Notifications</span>
-        </Button>
+        <Notifications />
         <Button variant="ghost" size="sm" className="hidden h-9 w-9 p-0 sm:flex">
           <Settings className="h-4 w-4" />
           <span className="sr-only">Settings</span>

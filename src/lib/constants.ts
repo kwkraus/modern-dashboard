@@ -87,3 +87,47 @@ export const CHART_DATA = {
     { name: "Tablet", value: 20, color: "hsl(var(--chart-3))" },
   ],
 }
+
+// Notification data structure with sample notifications
+export const NOTIFICATIONS = [
+  {
+    id: "1",
+    title: "New user registered",
+    message: "John Doe has created a new account and completed onboarding",
+    timestamp: Date.now() - 1000 * 60 * 5, // 5 minutes ago
+    isRead: false,
+    category: "user" as const,
+  },
+  {
+    id: "2",
+    title: "Report generated",
+    message: "Your monthly analytics report is ready to download",
+    timestamp: Date.now() - 1000 * 60 * 30, // 30 minutes ago
+    isRead: false,
+    category: "report" as const,
+  },
+  {
+    id: "3",
+    title: "System update",
+    message: "Dashboard has been updated to version 2.1.0 with new features",
+    timestamp: Date.now() - 1000 * 60 * 60 * 2, // 2 hours ago
+    isRead: false,
+    category: "system" as const,
+  },
+  {
+    id: "4",
+    title: "Payment received",
+    message: "Invoice #1234 has been paid successfully",
+    timestamp: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
+    isRead: true,
+    category: "payment" as const,
+  },
+  {
+    id: "5",
+    title: "Team invitation",
+    message: "You have been invited to join the Marketing team",
+    timestamp: Date.now() - 1000 * 60 * 60 * 48, // 2 days ago
+    isRead: true,
+    category: "team" as const,
+  },
+] as const
