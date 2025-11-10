@@ -193,6 +193,12 @@ export const MOCK_NOTIFICATIONS = [
   },
 ] as const
 
+/**
+ * `MockNotification` is a type derived from the `MOCK_NOTIFICATIONS` array using `as const`.
+ * It represents the exact shape and literal values of the mock notification data.
+ * Use `MockNotification` for type-safe operations on the mock data itself (e.g., in tests or stories).
+ * For general application logic, component props, and runtime data, use the broader `Notification` type.
+ */
 export type MockNotification = typeof MOCK_NOTIFICATIONS[number]
 ```
 
