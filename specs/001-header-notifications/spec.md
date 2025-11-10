@@ -76,7 +76,7 @@ Each notification in the panel displays relevant information including a title, 
 ### Edge Cases
 
 - What happens when the user has 0 notifications? (The bell icon displays without a badge)
-- How does the system handle exactly 10 unread notifications? (Display "9+" badge)
+- How does the system handle exactly 10 unread notifications? (Display "9+" badge (since 10 >= 10))
 - What happens when the panel is open and a new notification arrives? (Badge count updates in real-time, but panel content remains stable to avoid disrupting user interaction)
 - How does the notification panel behave on mobile devices with limited screen space? (Panel should be responsive and fit within viewport)
 - What happens when notification messages are very long? (Truncate with ellipsis after 2-3 lines)
