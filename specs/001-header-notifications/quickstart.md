@@ -292,7 +292,14 @@ Create the notification panel component with dropdown behavior.
          >
            <Button variant="ghost" size="sm" className="relative h-9 w-9 p-0">
              <Bell className="h-4 w-4" />
-             {badgeDisplay && <Badge>{badgeDisplay}</Badge>}
+             {badgeDisplay && (
+               <Badge
+                 className="bg-green-500 dark:bg-green-600 absolute -top-1 -right-1 h-5 min-w-[1.25rem] px-1.5 text-xs font-semibold text-white"
+                 aria-label={`${badgeDisplay} unread notifications`}
+               >
+                 {badgeDisplay}
+               </Badge>
+             )}
            </Button>
          </NotificationPanel>
          {/* ... rest of header ... */}
