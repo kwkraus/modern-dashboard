@@ -6,10 +6,12 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { SettingsDialog } from "@/components/settings-dialog"
 import { Bell, Search, Settings } from "lucide-react"
 
 export function Header() {
   const [searchOpen, setSearchOpen] = React.useState(false)
+  const [settingsOpen, setSettingsOpen] = React.useState(false)
 
   return (    <header className="flex h-16 items-center justify-between border-b bg-background px-4 shrink-0 border-border" style={{ lineHeight: 1 }}>
       <div className="flex items-center gap-2 sm:gap-4">
@@ -56,12 +58,17 @@ export function Header() {
       <div className="flex items-center gap-2 sm:gap-4">
         <ThemeToggle />
         
-        {/* Hide secondary actions on mobile */}
+        {/* Hide notifications on mobile, but show settings */}
         <Button variant="ghost" size="sm" className="hidden h-9 w-9 p-0 sm:flex">
           <Bell className="h-4 w-4" />
           <span className="sr-only">Notifications</span>
         </Button>
-        <Button variant="ghost" size="sm" className="hidden h-9 w-9 p-0 sm:flex">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="h-9 w-9 p-0"
+          onClick={() => setSettingsOpen(true)}
+        >
           <Settings className="h-4 w-4" />
           <span className="sr-only">Settings</span>
         </Button>
@@ -72,6 +79,8 @@ export function Header() {
           <AvatarFallback>JD</AvatarFallback>
         </Avatar>
       </div>
+      
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </header>
   )
 }

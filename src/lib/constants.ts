@@ -87,3 +87,30 @@ export const CHART_DATA = {
     { name: "Tablet", value: 20, color: "hsl(var(--chart-3))" },
   ],
 }
+
+export const SETTINGS_OPTIONS = [
+  {
+    id: "auto-updates",
+    label: "Auto updates",
+    description: "Automatically update the application",
+    defaultEnabled: false,
+  },
+  {
+    id: "validate-data",
+    label: "Validate incoming data",
+    description: "Validate data before processing",
+    defaultEnabled: true,
+  },
+  {
+    id: "clear-cache",
+    label: "Clear cache after refresh",
+    description: "Clear cache when refreshing the page",
+    defaultEnabled: false,
+  },
+  {
+    id: "preview-features",
+    label: "Turn on Preview Features",
+    description: "Enable experimental features",
+    defaultEnabled: false,
+  },
+] as const
