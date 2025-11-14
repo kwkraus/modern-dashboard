@@ -3,6 +3,7 @@
 import * as React from "react"
 import { AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { logger } from "@/lib/logger"
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -25,7 +26,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo)
+    logger.error('ErrorBoundary caught an error', error, errorInfo)
   }
   resetError = () => {
     this.setState({ hasError: false })
