@@ -32,6 +32,7 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
       "prefer-const": "error",
       "no-var": "error",
+      "no-console": ["error", { "allow": ["warn", "error"] }], // Prevent console.log in production
       
       // Accessibility
       "jsx-a11y/alt-text": "error",

@@ -1,5 +1,6 @@
 // Performance monitoring utilities
 import * as React from "react"
+import { logger } from "./logger"
 
 /**
  * Web Vitals tracking
@@ -12,7 +13,7 @@ export function reportWebVitals(metric: {
 }) {
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
-    console.log(`[Web Vital] ${metric.name}:`, metric.value)
+    logger.debug(`Web Vital: ${metric.name}`, { value: metric.value })
   }
   
   // In production, send to analytics service
@@ -40,7 +41,7 @@ export function observePerformance() {
   if ('PerformanceObserver' in window) {    try {
       const longTaskObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          console.warn(`Long task detected: ${entry.duration}ms`)
+          logger.warn(`Long task detected: ${entry.duration}ms`)
         }
       })
       longTaskObserver.observe({ entryTypes: ['longtask'] })
@@ -102,7 +103,7 @@ export function useRenderTracker(componentName: string) {
       
       if (startTime.current) {
         const renderTime = endTime - startTime.current
-        console.log(`[Render] ${componentName} #${renderCount.current}: ${renderTime.toFixed(2)}ms`)
+        logger.debug(`Render: ${componentName} #${renderCount.current}`, { renderTime: `${renderTime.toFixed(2)}ms` })
       }
       
       startTime.current = performance.now()
@@ -116,6 +117,6 @@ export function useRenderTracker(componentName: string) {
 export function reportBundleSize() {
   if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
     // This would be used with webpack-bundle-analyzer
-    console.log('Bundle analysis available at: http://localhost:8888')
+    logger.debug('Bundle analysis available at: http://localhost:8888')
   }
 }
